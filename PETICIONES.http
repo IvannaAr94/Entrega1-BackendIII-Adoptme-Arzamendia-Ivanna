@@ -1,0 +1,34 @@
+@baseUrl = http://localhost:8080
+
+### 1. Probar 50 usuarios de muestra (no se guardan)
+GET {{baseUrl}}/api/mocks/mockingusers
+
+### 2. Generar una cantidad opcional de usuarios (no se guardan)
+GET {{baseUrl}}/api/mocks/mockingusers?quantity=3
+
+### 3. Probar mascotas de muestra (no se guardan)
+GET {{baseUrl}}/api/mocks/mockingpets?quantity=5
+
+### 4. Generar e INSERTAR datos en MongoDB
+POST {{baseUrl}}/api/mocks/generateData
+Content-Type: application/json
+
+{
+  "users": 10,
+  "pets": 5
+}
+
+### 5. Verificar datos guardados (password excluida por seguridad)
+GET {{baseUrl}}/api/users
+
+### 6. Verificar mascotas guardadas
+GET {{baseUrl}}/api/pets
+
+### 7. Verificar validación (debe dar HTTP 400)
+POST {{baseUrl}}/api/mocks/generateData
+Content-Type: application/json
+
+{
+  "users": -3,
+  "pets": "2"
+}
